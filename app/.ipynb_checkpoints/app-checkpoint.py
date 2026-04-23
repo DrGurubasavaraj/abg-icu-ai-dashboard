@@ -1,7 +1,17 @@
 import pickle
 
 # Load trained model
-with open("model.pkl", "rb") as f:
+import os
+import pickle
+
+# Get current file directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Build full path
+model_path = os.path.join(BASE_DIR, "model.pkl")
+
+# Load model
+with open(model_path, "rb") as f:
     model = pickle.load(f)
 import streamlit as st
 import pandas as pd
