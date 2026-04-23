@@ -201,9 +201,23 @@ if st.button("🔍 ANALYZE PATIENT"):
     override_actions, override_reasons = smart_override(
         pco2, po2, rr, tv, fio2, peep
     )
-
+  
     st.markdown("---")
-    st.subheader("🧠 RESULTS")
+    st.subheader("🧾 FINAL CLINICAL SUMMARY")
+
+    # --- Confidence label ---
+    if confidence > 0.85:
+        conf_label = "High confidence"
+    elif confidence > 0.6:
+        conf_label = "Moderate confidence"
+    else:
+        conf_label = "Low confidence – interpret cautiously"
+
+    # --- Main summary box ---
+    st.success(f"""
+    **AI Suggestion:** {prediction}  
+    **Confidence:** {round(confidence*100,1)}% ({conf_label})
+    """)
 
 
     # --- AI PANEL ---
@@ -336,22 +350,7 @@ def calculate_severity(ph, pco2, po2):
     else:
         return "Stable", "green"
         
-st.markdown("---")
-st.subheader("🧾 FINAL CLINICAL SUMMARY")
 
-# --- Confidence label ---
-if confidence > 0.85:
-    conf_label = "High confidence"
-elif confidence > 0.6:
-    conf_label = "Moderate confidence"
-else:
-    conf_label = "Low confidence – interpret cautiously"
-
-# --- Main summary box ---
-st.success(f"""
-**AI Suggestion:** {prediction}  
-**Confidence:** {round(confidence*100,1)}% ({conf_label})
-""")
 
 # --- Actionable recommendations ---
 st.write("### 📌 Recommended Actions")
