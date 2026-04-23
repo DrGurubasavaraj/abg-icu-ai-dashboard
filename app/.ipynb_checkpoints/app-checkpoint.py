@@ -1,7 +1,7 @@
 import pickle
 
 # Load trained model
-with open("../model.pkl", "rb") as f:
+with open("model.pkl", "rb") as f:
     model = pickle.load(f)
 import streamlit as st
 import pandas as pd
