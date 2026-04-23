@@ -191,19 +191,20 @@ if st.button("🔍 ANALYZE PATIENT"):
 
     input_data = [[ph, pco2, hco3, po2, rr, tv, fio2, peep]]
 
+    # ML prediction
     prediction = model.predict(input_data)[0]
 
     probs = model.predict_proba(input_data)[0]
     confidence = max(probs)
-    
+
+    # Override
+    override_actions, override_reasons = smart_override(
+        pco2, po2, rr, tv, fio2, peep
+    )
+
     st.markdown("---")
     st.subheader("🧠 RESULTS")
 
-
-    # --- MODEL INPUT ---
-    input_data = [[ph, pco2, hco3, po2, rr, tv, fio2, peep]]
-    prediction = model.predict(input_data)[0]
-    override_actions, override_reasons = smart_override(pco2, po2, rr, tv, fio2, peep)
 
     # --- AI PANEL ---
     col3, col4 = st.columns(2)
