@@ -218,6 +218,21 @@ if st.button("🔍 ANALYZE PATIENT"):
     **AI Suggestion:** {prediction}  
     **Confidence:** {round(confidence*100,1)}% ({conf_label})
     """)
+    # --- Actionable recommendations ---
+    st.write("### 📌 Recommended Actions")
+
+    for action in override_actions:
+        st.warning(f"• {action}")
+
+    # --- Clinical reasoning ---
+    st.write("### 🧠 Clinical Interpretation")
+
+    for reason in override_reasons:
+        st.info(f"• {reason}")
+
+    # --- Safety note ---
+    if confidence < 0.6:
+        st.error("⚠️ Low model confidence → possible mixed or complex physiology")
 
 
     # --- AI PANEL ---
@@ -350,22 +365,5 @@ def calculate_severity(ph, pco2, po2):
     else:
         return "Stable", "green"
         
-
-
-# --- Actionable recommendations ---
-st.write("### 📌 Recommended Actions")
-
-for action in override_actions:
-    st.warning(f"• {action}")
-
-# --- Clinical reasoning ---
-st.write("### 🧠 Clinical Interpretation")
-
-for reason in override_reasons:
-    st.info(f"• {reason}")
-
-# --- Safety note ---
-if confidence < 0.6:
-    st.error("⚠️ Low model confidence → possible mixed or complex physiology")
 
 st.warning("⚠️ Clinical decision support only – correlate with full clinical picture")
