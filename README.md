@@ -21,7 +21,7 @@ Bridges the gap between physiological reasoning and AI-assisted decision-making 
 - Pandas
 
 ## Live App
-👉 [Click here to use the app](YOUR_STREAMLIT_LINK)
+👉 [Click here to use the app](https://abg-icu-ai-dashboard-agyqmmaajsdagxrud2wfkk.streamlit.app/)
 
 ## Disclaimer
 Educational tool only. Not for direct clinical use.
